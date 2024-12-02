@@ -68,5 +68,26 @@ class TicTakToe {
         this.switchPlayer();
     }
 
+    switchPlayer() {
+        // Toggle between players 'X' and 'O'
+        this.currentPlayer = this.currentPlayer === 'X' ? 'O' : 'X';
+        this.updateTurnDisplay(); // Update the turn display to show the next player
+    }
+
+    updateTurnDisplay() {
+        // Update the UI to show the current player (X or O)
+        this.turnDisplay.textContent = this.currentPlayer;
+    }
+
+    checkWin() {
+        // Check if any of the winning conditions are met
+        return this.winningConditions.some(condition => {
+            // For each winning combination, check if all positions match the current player's mark
+            return condition.every(index => {
+                return this.board[index] === this.currentPlayer;
+            });
+        });
+    }
+
     
 }
