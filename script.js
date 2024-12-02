@@ -25,6 +25,11 @@ class TicTakToe {
     this.playAgainBtn = document.getElementById('button-play-again'); // Button to reset the game
     this.gameBoard = document.getElementById('game-board'); // The game board
 
-
+            // Initial setup for UI updates
+            this.updateTurnDisplay(); // Update the turn display to show the first player ('X')
+            this.updateScoreboard(); // Update the scoreboard to show current scores
+            this.setupEventListeners(); // Set up event listeners for user interactions
     }
+
+    
 }
