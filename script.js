@@ -5,6 +5,10 @@ class TicTakToe {
     this.board = ['', '', '', '', '', '', '', '', ''];// empty 3x3 board 
     this.gameActive = true; //sets the game as active initially 
 
+            // Initialize or retrieve scores from localStorage
+            this.scoreX = parseInt(localStorage.getItem('scoreX') || '0'); // Retrieve or set 'X' score to 0
+            this.scoreO = parseInt(localStorage.getItem('scoreO') || '0'); // Retrieve or set 'O' score to 0
+
 
     //the winning combinations
     this.winningConditions = [
@@ -140,8 +144,6 @@ class TicTakToe {
         this.currentPlayer = 'X';
         this.updateTurnDisplay(); // Update the UI to show it's 'X's turn
     }
-
-    
 }
 
 // Initialize the game when the page loads
