@@ -31,5 +31,16 @@ class TicTakToe {
             this.setupEventListeners(); // Set up event listeners for user interactions
     }
 
+    setupEventListeners() {
+              // Add click listeners to game squares
+              for (let i = 0; i < 9; i++) {
+                const square = document.getElementById(`square-${i}`);
+                square.addEventListener('click', () => this.handleSquareClick(i)); // Handle click on each square
+            }
+    
+            // Play again button listener to reset the game
+            this.playAgainBtn.addEventListener('click', () => this.resetGame());
+    }
+
     
 }
