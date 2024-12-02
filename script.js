@@ -89,5 +89,33 @@ class TicTakToe {
         });
     }
 
+    checkDraw() {
+        // Check if all cells are filled, meaning it's a draw if no winner
+        return this.board.every(cell => cell !== ''); // True if all cells are filled
+    }
+
+    handleGameEnd(isDraw) {
+        // Handle the end of the game (win or draw)
+        this.gameActive = false; // End the game
+
+        if (!isDraw) {
+            // Update score for the winner and save to localStorage
+            if (this.currentPlayer === 'X') {
+                this.scoreX++; // Increase 'X' score
+                localStorage.setItem('scoreX', this.scoreX.toString()); // Save the score in localStorage
+            } else {
+                this.scoreO++; // Increase 'O' score
+                localStorage.setItem('scoreO', this.scoreO.toString()); // Save the score in localStorage
+            }
+            this.updateScoreboard(); // Update the displayed scores
+
+            // Display win message
+            alert(`Player ${this.currentPlayer} Wins!`);
+        } else {
+            // If it's a draw, display a draw message
+            alert('Game is a Draw!');
+        }
+    }
+
     
 }
