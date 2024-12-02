@@ -1,50 +1,50 @@
-class TicTakToe {
+class TicTacToe {
     constructor() {
-    // this initializes the games stats
-    this.currentPlayer = 'x';//sets the first player to 'x'
-    this.board = ['', '', '', '', '', '', '', '', ''];// empty 3x3 board 
-    this.gameActive = true; //sets the game as active initially 
+        // Initialize game state
+        this.currentPlayer = 'X'; // Set the first player to 'X'
+        this.board = ['', '', '', '', '', '', '', '', '']; // Empty 3x3 board (9 cells)
+        this.gameActive = true; // Set the game as active initially
 
-            // Initialize or retrieve scores from localStorage
-            this.scoreX = parseInt(localStorage.getItem('scoreX') || '0'); // Retrieve or set 'X' score to 0
-            this.scoreO = parseInt(localStorage.getItem('scoreO') || '0'); // Retrieve or set 'O' score to 0
+        // Initialize or retrieve scores from localStorage
+        this.scoreX = parseInt(localStorage.getItem('scoreX') || '0'); // Retrieve or set 'X' score to 0
+        this.scoreO = parseInt(localStorage.getItem('scoreO') || '0'); // Retrieve or set 'O' score to 0
 
+        // Winning combinations (array of index positions to check for a win)
+        this.winningConditions = [
+            [0, 1, 2], // Top row
+            [3, 4, 5], // Middle row
+            [6, 7, 8], // Bottom row
+            [0, 3, 6], // Left column
+            [1, 4, 7], // Middle column
+            [2, 5, 8], // Right column
+            [0, 4, 8], // Diagonal top-left to bottom-right
+            [2, 4, 6]  // Diagonal top-right to bottom-left
+        ];
 
-    //the winning combinations
-    this.winningConditions = [
-        [0, 1, 2],//top row
-        [3, 4, 5],//middle row
-        [6, 7, 8],//bottom row
-        [0, 3, 6],//let column
-        [1, 4, 7],//middle column
-        [2, 5, 8],//right column
-        [0, 4, 8],//diagonal top left to middle right
-        [2, 4, 6],//diagonal top right to bottom left
-    ];
+        // Get DOM elements for UI updates
+        this.turnDisplay = document.getElementById('turn'); // Display the current player's turn
+        this.scoreboardX = document.getElementById('scoreboard-x'); // Display the score of 'X'
+        this.scoreboardO = document.getElementById('scoreboard-o'); // Display the score of 'O'
+        this.playAgainBtn = document.getElementById('button-play-again'); // Button to reset the game
+        this.gameBoard = document.getElementById('game-board'); // The game board (not directly used but useful for DOM interaction)
 
-    // Get DOM elements for UI updates
-    this.turnDisplay = document.getElementById('turn'); // Display the current player's turn
-    this.scoreboardX = document.getElementById('scoreboard-x'); // Display the score of 'X'
-    this.scoreboardO = document.getElementById('scoreboard-o'); // Display the score of 'O'
-    this.playAgainBtn = document.getElementById('button-play-again'); // Button to reset the game
-    this.gameBoard = document.getElementById('game-board'); // The game board
-
-            // Initial setup for UI updates
-            this.updateTurnDisplay(); // Update the turn display to show the first player ('X')
-            this.updateScoreboard(); // Update the scoreboard to show current scores
-            this.setupEventListeners(); // Set up event listeners for user interactions
+        // Initial setup for UI updates
+        this.updateTurnDisplay(); // Update the turn display to show the first player ('X')
+        this.updateScoreboard(); // Update the scoreboard to show current scores
+        this.setupEventListeners(); // Set up event listeners for user interactions
     }
 
     setupEventListeners() {
-              // Add click listeners to game squares
-              for (let i = 0; i < 9; i++) {
-                const square = document.getElementById(`square-${i}`);
-                square.addEventListener('click', () => this.handleSquareClick(i)); // Handle click on each square
-            }
-    
-            // Play again button listener to reset the game
-            this.playAgainBtn.addEventListener('click', () => this.resetGame());
+        // Add click listeners to game squares (each square has an id like 'square-0', 'square-1', etc.)
+        for (let i = 0; i < 9; i++) {
+            const square = document.getElementById(`square-${i}`);
+            square.addEventListener('click', () => this.handleSquareClick(i)); // Handle click on each square
+        }
+
+        // Play again button listener to reset the game
+        this.playAgainBtn.addEventListener('click', () => this.resetGame());
     }
+
     handleSquareClick(index) {
         // Check if square is already filled or if the game is not active
         const square = document.getElementById(`square-${index}`);
@@ -121,7 +121,6 @@ class TicTakToe {
         }
     }
 
-    
     updateScoreboard() {
         // Update the scoreboard UI with the current scores for 'X' and 'O'
         this.scoreboardX.textContent = this.scoreX;
