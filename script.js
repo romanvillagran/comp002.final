@@ -41,6 +41,32 @@ class TicTakToe {
             // Play again button listener to reset the game
             this.playAgainBtn.addEventListener('click', () => this.resetGame());
     }
+    handleSquareClick(index) {
+        // Check if square is already filled or if the game is not active
+        const square = document.getElementById(`square-${index}`);
+        if (this.board[index] !== '' || !this.gameActive) return; // Prevent marking a filled square or playing if game is over
+
+        // Place the current player's mark on the board
+        this.board[index] = this.currentPlayer;
+        
+        // Update the UI: set the text content to current player's mark (X or O) and add relevant CSS class
+        square.textContent = this.currentPlayer;
+        square.classList.add(this.currentPlayer.toLowerCase());
+
+        // Check for win or draw after the move
+        if (this.checkWin()) {
+            this.handleGameEnd(false); // If there's a win, end the game (false for no draw)
+            return;
+        }
+
+        if (this.checkDraw()) {
+            this.handleGameEnd(true); // If there's a draw, end the game (true for draw)
+            return;
+        }
+
+        // Switch to the next player
+        this.switchPlayer();
+    }
 
     
 }
