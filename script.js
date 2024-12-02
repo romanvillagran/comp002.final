@@ -118,4 +118,28 @@ class TicTakToe {
     }
 
     
+    updateScoreboard() {
+        // Update the scoreboard UI with the current scores for 'X' and 'O'
+        this.scoreboardX.textContent = this.scoreX;
+        this.scoreboardO.textContent = this.scoreO;
+    }
+
+    resetGame() {
+        // Reset the board and game state for a new game
+        this.board = ['', '', '', '', '', '', '', '', '']; // Empty the board
+        this.gameActive = true; // Set the game to active again
+
+        // Clear the board UI (remove marks and classes)
+        for (let i = 0; i < 9; i++) {
+            const square = document.getElementById(`square-${i}`);
+            square.textContent = ''; // Remove any text in the square
+            square.classList.remove('x', 'o'); // Remove CSS classes for X and O
+        }
+
+        // Reset to player 'X's turn
+        this.currentPlayer = 'X';
+        this.updateTurnDisplay(); // Update the UI to show it's 'X's turn
+    }
+
+    
 }
